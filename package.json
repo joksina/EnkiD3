@@ -1,0 +1,19 @@
+{
+  "name": "enki",
+  "version": "1.0.0",
+  "description": "Visualizing Data",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joksina/EnkiD3.git"
+  },
+  "author": "aj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joksina/EnkiD3/issues"
+  },
+  "homepage": "https://github.com/joksina/EnkiD3#readme"
+}
