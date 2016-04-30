@@ -2,7 +2,7 @@
   "name": "enki",
   "version": "1.0.0",
   "description": "Visualizing Data",
-  "main": "server.js",
+  "main": "server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,6 +14,12 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/joksina/EnkiD3/issues"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
+    "request": "^2.72.0"
   },
   "homepage": "https://github.com/joksina/EnkiD3#readme"
 }
