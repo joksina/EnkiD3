@@ -1,5 +1,6 @@
 var express = require("express");
 var app = express();
+var port = 8080;
 var bodyParser = require("body-parser");
 var request = require("request");
 var cors = require('cors');
@@ -19,6 +20,7 @@ app.all('/*', function(req, res, next) {
  }
 });
 
+app.use(express.static(__dirname +'/../client'));
 //Use GET reguest to get the data from the json file
 app.get('/api/v1/data', function(req, res){
  request({url:'https://app.upguard.com/api/v1/nodes/6347/scan_details.json', 
@@ -38,8 +40,8 @@ app.get('/api/v1/data', function(req, res){
 
 })
 
-app.listen(8080, function() {
- console.log("i am running");
+app.listen(port, function() {
+ console.log("i am running " + port);
 })
 
 
