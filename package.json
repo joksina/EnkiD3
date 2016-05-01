@@ -16,9 +16,11 @@
     "url": "https://github.com/joksina/EnkiD3/issues"
   },
   "dependencies": {
+    "angular": "^1.5.5",
     "body-parser": "^1.15.0",
     "cors": "^2.7.1",
     "express": "^4.13.4",
+    "nodemon": "^1.9.2",
     "request": "^2.72.0"
   },
   "homepage": "https://github.com/joksina/EnkiD3#readme"
