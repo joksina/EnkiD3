@@ -1,24 +1,20 @@
-angular.module('ChartsApp')
-.service('socket', function ($http, $q) {
+angular.module('UpGuardApp')
+.service('socket', function ($http) {
   'use strict';
 
-  var subscribers = {};
+  var socket = {};
 
   var on = function(eventName, callback) {
-    if (!subscribers[eventName]) {
-      subscribers[eventName] = [];
+    if (!socket[eventName]) {
+      socket[eventName] = [];
     }
-    subscribers[eventName].push(callback);
+    socket[eventName].push(callback);
   };
 
   var emit = function(eventName, body) {
-    if (!subscribers[eventName]) {
-      return false;
-    }
-    subscribers[eventName].forEach(function(callback) {
+    socket[eventName].forEach(function(callback) {
       callback(body);
     });
-    return true;
   };
 
   return {

@@ -1,4 +1,4 @@
-angular.module('ChartsApp')
+angular.module('UpGuardApp')
 
 .controller('detailCtrl', function ($scope, data, socket) {
     'use strict';
@@ -16,7 +16,7 @@ angular.module('ChartsApp')
     $scope.$digest();
   });
 
-  socket.on('updateData', function(data) {
+  socket.on('update', function(data) {
     $scope.data = angular.copy(data);
   });
 
@@ -24,10 +24,14 @@ angular.module('ChartsApp')
     if (data.name === name) {
       return data;
     }
-    if (!data.children) return null;
+    if (!data.children){
+      return null;
+    }
     for (var i = data.children.length - 1; i >= 0; i--) {
-      var matchingNode = getNode(name, data.children[i]);
-      if (matchingNode) return matchingNode;
+      var match = getNode(name, data.children[i]);
+      if (match) {
+        return match;
+      }
     }
   };    
 });

@@ -1,4 +1,4 @@
-angular.module('ChartsApp')
+angular.module('UpGuardApp')
 .directive('treeChart', function(socket) {
   'use strict';
 

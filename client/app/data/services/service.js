@@ -1,12 +1,11 @@
-angular.module('ChartsApp')
+angular.module('UpGuardApp')
 
-.service('data', function ($http, $q, socket) {
+.service('data', function ($http, socket) {
   'use strict';
  
   var getData = function () {
     return $http.get("data.json").success(function(data) {
-      // json = data;
-      socket.emit('updateData', data);
+      socket.emit('update', data);
       return data;
     });
   };

@@ -7,24 +7,21 @@
     <link rel="stylesheet" href="css/lib/bootstrap.min.css" />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
-  <body>
-  <nav class="navbar" role="navigation" >
-    <a class="navbar-brand">UpGuard Scan Details</a>
-  </nav>
+  <body ng-app="UpGuardApp">
+    <nav class="navbar" role="navigation" >
+      <a class="navbar-brand">UpGuard Scan Details</a>
+    </nav>
     <div class="container-fluid">
-      <div ng-app="ChartsApp">       
-        <div ng-controller="chartCtrl">
-          <tree-chart data="data" diameter="1000"></tree-chart>
-        </div>
+      <div ng-controller="chartCtrl">
+        <tree-chart data="data" diameter="1000"></tree-chart>
+      </div>
 
-        <div ng-controller="detailCtrl">
-          <div id="panel">
-            <div ng-if="detail">
-              <ng-include src="'app/data/temp/details.html'"></ng-include>
-            </div>   
-          </div>
+      <div ng-controller="detailCtrl">
+        <div id="panel">
+          <div ng-if="detail">
+            <ng-include src="'app/data/temp/details.html'"></ng-include>
+          </div>   
         </div>
-          
       </div>
     </div>
     <script src="app/lib/d3.v3.js"></script>
