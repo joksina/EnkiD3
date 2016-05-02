@@ -4,7 +4,7 @@ angular.module('UpGuardApp')
     'use strict';
 
  angular.element(document.querySelector('#panel'))
-  .on('hoverNode', function(e) {
+  .on('hover', function(e) {
     $scope.node = getNode(e.detail, $scope.data);
     $scope.detail = true;
     $scope.$digest();
@@ -28,7 +28,7 @@ angular.module('UpGuardApp')
     if (!data.children){
       return null;
     }
-    for (var i = 0; i < data.children.length-1; i++) {
+    for (var i = 0; i < data.children.length; i++) {
       var match = getNode(name, data.children[i]);
       if (match) {
         return match;

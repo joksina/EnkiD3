@@ -4,7 +4,7 @@ d3.chart = {};
 
 d3.chart.treeChart = function() {
 
-  var treeData, svg, diameter, activeNode;
+  var root, svg, diameter, active;
   var height = 800;
   var width = 700;
 
@@ -13,98 +13,65 @@ d3.chart.treeChart = function() {
     var tree = d3.layout.tree()
       .size([height, width - 160])
 
-     svg = d3.select("#graph").append("svg")
+    svg = d3.select("#graph").append("svg")
       .attr("width", width)
       .attr("height", height )
       .append("g")
       .attr("transform", "translate(40, 0)");
 
-    var nodes = tree.nodes(treeData),
+    var nodes = tree.nodes(root),
       links = tree.links(nodes);
 
-    activeNode = null;
+    active = null;
 
     svg.call(update, nodes, links);
   }
-
-d3.json("./data.json", function(json) {
-  treeData = json;
-  treeData.x0 = height / 2;
-  treeData.y0 = 0;
-  function toggleAll(d) {
-    if (d.children) {
-      d.children.forEach(toggleAll);
-      toggle(d);
-    }
-  }
-  // Initialize the display to show a few nodes.
-  treeData.children.forEach(toggleAll);
-  console.log("i", treeData.children[1])
-  toggle(treeData.children[1]);
-  toggle(treeData.children[1].children[2]);
-  toggle(treeData.children[9]);
-  toggle(treeData.children[9].children[0]);
-  update(treeData);
-});
  
   var update = function(container, nodes, links) {
-    nodes.map(function(node) {
-      addIndex(node);
-    });
-
+    
     var diagonal = d3.svg.diagonal()
-      .projection(function(d) { return [d.y, d.x]; });
+      .projection(function(d) {
+        return [d.y, d.x];
+      });
 
-    var linkSelection = svg.selectAll(".link").data(links, function(d) {
+    var selectLink = svg.selectAll(".link").data(links, function(d) {
       return d.source.name + d.target.name + Math.random();
     });
-    linkSelection.exit().remove();
+    selectLink.exit().remove();
 
-    linkSelection.enter().append("path")
+    selectLink.enter().append("path")
       .attr("class", "link")
       .attr("d", diagonal);
 
-    var nodeSelection = container.selectAll(".node").data(nodes, function(d) {
+    var selectNode = container.selectAll(".node").data(nodes, function(d) {
       return d.name + Math.random();
     });
-    nodeSelection.exit().remove();
+    selectNode.exit().remove();
 
-    var node = nodeSelection.enter().append("g")
+    var node = selectNode.enter().append("g")
       .attr("class", "node")
       .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
       .on('mouseover', function(d) {
-        if(activeNode !== null) {
+        if(active) {
           return;
         }
         fade(0.1)(d);
         document.querySelector('#panel').dispatchEvent(
-          new CustomEvent("hoverNode", { "detail": d.name })
+          new CustomEvent("hover", { "detail": d.name })
         );
-      })
-      .on('mouseout', function(d) {
-        if(activeNode !== null) {
+      }).on('mouseout', function(d) {
+        if(active) {
           return;
         }
         fade(1)(d);
-      })
-      .on('click', function(d) {
+      }).on('click', function(d) {
         select(d.name);
-
       });
 
     node.append("circle")
-      .attr("r", function(d) { return 4.5 * (d.size || 1); })
-      .style('stroke', function(d) {
-        return d3.scale.linear()
-          .domain([1, 0])
-          .range(["steelblue", "red"])(typeof d.satisfaction !== "undefined" ? d.satisfaction : 1);
-      })
-      .style('fill', function(d) {
-        if (typeof d.satisfaction === "undefined") return '#fff';
-        return d3.scale.linear()
-          .domain([1, 0])
-          .range(["white", "#f66"])(typeof d.satisfaction !== "undefined" ? d.satisfaction : 1);
-      }).on("click", toggle)
+      .attr("r", 5)
+      .style('stroke', "steelblue")
+      .style('fill', "white");
 
     node.append("text")
       .attr("dy", ".45em")
@@ -113,16 +80,18 @@ d3.json("./data.json", function(json) {
       .text(function(d) {
         return d.name;
     });
+
+    nodes.map(function(node) {
+      index(node);
+    });
   };
 
 
-  var addIndex = function(node) {
+  var index = function(node) {
     node.index = {
-      relatedNodes: []
-    };
-    if (node.dependents) {
-      node.index.relatedNodes = node.index.relatedNodes.concat(node.dependents);
-    }
+      likeNode: []
+    };    
+    node.index.likeNode = node.index.likeNode.concat(node);   
   };
 
 
@@ -131,7 +100,7 @@ d3.json("./data.json", function(json) {
       svg.selectAll(".node")
         .filter(function(d) {
           if (d.name === node.name) return false;
-          return node.index.relatedNodes.indexOf(d.name) === -1;
+          return node.index.likeNode.indexOf(d.name) === -1;
         })
         .transition()
         .style("opacity", opacity);
@@ -139,53 +108,38 @@ d3.json("./data.json", function(json) {
   };
 
   var select = function(name) {
-    if (activeNode && activeNode.name == name) {
+    if (active && active.name == name) {
       unselect();
       return;
     }
-    unselect();
     svg.selectAll(".node")
       .filter(function(d) {
         if (d.name === name) return true;
-      })
-      .each(function(d) {
+      }).each(function(d) {
         document.querySelector('#panel').dispatchEvent(
-          new CustomEvent("selectNode")
-        );
+          new CustomEvent("selectNode"));
         d3.select(this).attr("id", "node-active");
-        activeNode = d;
+        active = d;
         fade(0.1)(d);
       });
   };
-  function toggle(d) {
-  if (d.name) {
-    console.log(d)
-    d._children = d.name;
-    d.name = null;
-  } else {
-    d.name = d._children;
-    d._children = null;
-    }
-  }
 
   var unselect = function() {
-    if (activeNode == null) return;
-    fade(1)(activeNode);
+    if (!active) return;
+    fade(1)(active);
     d3.select('#node-active').attr("id", null);
-    activeNode = null;
+    active = null;
     document.querySelector('#panel').dispatchEvent(
       new CustomEvent("unSelectNode")
     );
   };
 
-
-
   chart.select = select;
   chart.unselect = unselect;
 
   chart.data = function(value) {
-    if (!arguments.length) return treeData;
-    treeData = value;
+    if (!arguments.length) return root;
+    root = value;
     return chart;
   };
 
