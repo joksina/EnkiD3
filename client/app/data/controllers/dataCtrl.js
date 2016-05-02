@@ -20,6 +20,7 @@ angular.module('UpGuardApp')
     $scope.data = angular.copy(data);
   });
 
+//searching the tree
   var getNode = function(name, data) {
     if (data.name === name) {
       return data;
@@ -27,7 +28,7 @@ angular.module('UpGuardApp')
     if (!data.children){
       return null;
     }
-    for (var i = data.children.length - 1; i >= 0; i--) {
+    for (var i = 0; i < data.children.length-1; i++) {
       var match = getNode(name, data.children[i]);
       if (match) {
         return match;
