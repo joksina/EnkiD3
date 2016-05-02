@@ -1,0 +1,50 @@
+<div class="details panel panel-info">
+  <div class="panel-heading">{{ node.name }}</div>
+  <div class="panel-body">
+
+    <div ng-if="node.names">
+      <h5>Name</h5>
+      <ul>
+        {{ node.names }}
+      </ul>
+    </div>
+
+    <div ng-if="node.email">
+      <h5>Email</h5>
+      <ul>
+        {{ node.email }}
+      </ul>
+    </div>
+
+    <div ng-if="node.address">
+      <h5>Address</h5>
+      <ul>
+        {{ node.address }}
+      </ul>
+    </div>
+
+    <div class="url" ng-if="node.url">
+      <h5>Url</h5>
+      <ul>        
+        <a href="{{ node.url }}">{{ node.url }}</a>
+      </ul>
+    </div>
+
+    <div class="url" ng-if="node.value">
+      <h5>Value</h5>
+      <ul>
+        {{ node.value }}        
+      </ul>
+    </div>
+
+    <div ng-if="node.record">
+        <h5>Record Type</h5>
+        <ul>{{ node.record}}</ul>
+    </div>
+
+    <div ng-if="node.description">
+        <h5>Description</h5>
+        <ul>{{ node.description }}</ul>
+    </div>
+  </div>
+</div>
