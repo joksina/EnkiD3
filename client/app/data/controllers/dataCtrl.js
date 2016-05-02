@@ -6,6 +6,9 @@ angular.module('UpGuardApp')
  angular.element(document.querySelector('#panel'))
   .on('hover', function(e) {
     $scope.node = getNode(e.detail, $scope.data);
+    if($scope.data.children === null){
+      $scope.detail = false;
+    }
     $scope.detail = true;
     $scope.$digest();
   })

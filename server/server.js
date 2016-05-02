@@ -27,7 +27,7 @@ app.get('/api/v1/data', function(req, res){
 })
 
 app.listen(port, function() {
- console.log("i am running " + port);
+ console.log("i am running on port " + port);
 })
 
 
