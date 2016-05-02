@@ -19,17 +19,35 @@ d3.chart.treeChart = function() {
       .append("g")
       .attr("transform", "translate(40, 0)");
 
-    var nodes = tree.nodes(treeData).reverse(),
+    var nodes = tree.nodes(treeData),
       links = tree.links(nodes);
 
     activeNode = null;
 
-    svg.call(updateData, nodes, links);
+    svg.call(update, nodes, links);
   }
 
-
+d3.json("./data.json", function(json) {
+  treeData = json;
+  treeData.x0 = height / 2;
+  treeData.y0 = 0;
+  function toggleAll(d) {
+    if (d.children) {
+      d.children.forEach(toggleAll);
+      toggle(d);
+    }
+  }
+  // Initialize the display to show a few nodes.
+  treeData.children.forEach(toggleAll);
+  console.log("i", treeData.children[1])
+  toggle(treeData.children[1]);
+  toggle(treeData.children[1].children[2]);
+  toggle(treeData.children[9]);
+  toggle(treeData.children[9].children[0]);
+  update(treeData);
+});
  
-  var updateData = function(container, nodes, links) {
+  var update = function(container, nodes, links) {
     nodes.map(function(node) {
       addIndex(node);
     });
@@ -71,6 +89,7 @@ d3.chart.treeChart = function() {
       })
       .on('click', function(d) {
         select(d.name);
+
       });
 
     node.append("circle")
@@ -85,7 +104,7 @@ d3.chart.treeChart = function() {
         return d3.scale.linear()
           .domain([1, 0])
           .range(["white", "#f66"])(typeof d.satisfaction !== "undefined" ? d.satisfaction : 1);
-      });
+      }).on("click", toggle)
 
     node.append("text")
       .attr("dy", ".45em")
@@ -138,7 +157,16 @@ d3.chart.treeChart = function() {
         fade(0.1)(d);
       });
   };
-
+  function toggle(d) {
+  if (d.name) {
+    console.log(d)
+    d._children = d.name;
+    d.name = null;
+  } else {
+    d.name = d._children;
+    d._children = null;
+    }
+  }
 
   var unselect = function() {
     if (activeNode == null) return;
@@ -149,6 +177,8 @@ d3.chart.treeChart = function() {
       new CustomEvent("unSelectNode")
     );
   };
+
+
 
   chart.select = select;
   chart.unselect = unselect;
