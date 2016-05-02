@@ -1,25 +1,23 @@
 'use strict';
 
-d3.chart = d3.chart || {};
+d3.chart = {};
 
-d3.chart.architectureTree = function() {
+d3.chart.treeChart = function() {
 
-  var svg, tree, treeData, diameter, activeNode;
-  var height = 900;
+  var treeData, svg, diameter, activeNode;
+  var height = 800;
   var width = 700;
 
   
   function chart(){
-    if (typeof(tree) === 'undefined') {
-      tree = d3.layout.tree()
-        .size([height, width - 160])
+    var tree = d3.layout.tree()
+      .size([height, width - 160])
 
-      svg = d3.select("#graph").append("svg")
-        .attr("width", width)
-        .attr("height", height )
-        .append("g")
-        .attr("transform", "translate(40, 0)");
-    }
+     svg = d3.select("#graph").append("svg")
+      .attr("width", width)
+      .attr("height", height )
+      .append("g")
+      .attr("transform", "translate(40, 0)");
 
     var nodes = tree.nodes(treeData),
       links = tree.links(nodes);
@@ -31,7 +29,6 @@ d3.chart.architectureTree = function() {
 
  
   var updateData = function(container, nodes, links) {
-    addDependents(nodes);
     nodes.map(function(node) {
       addIndex(node);
     });
@@ -90,82 +87,24 @@ d3.chart.architectureTree = function() {
       });
 
     node.append("text")
-      .attr("dy", ".31em")
+      .attr("dy", ".45em")
       .attr("text-anchor", function(d) { return d.x  ? "start" : "end"; })
-      .attr("transform", function(d) { return d.x  ? "translate(8)" : "rotate(180)translate(-8)"; })
+      .attr("transform", function(d) { return d.x  ? "translate(9)" : "translate(-9)"; })
       .text(function(d) {
         return d.name;
-    });
-  };
-
-  var addDependents = function(nodes) {
-    var dependents = [];
-    nodes.forEach(function(node) {
-      if (node.dependsOn) {
-        node.dependsOn.forEach(function(dependsOn) {
-          if (!dependents[dependsOn]) {
-            dependents[dependsOn] = [];
-          }
-          dependents[dependsOn].push(node.name);
-        });
-      }
-    });
-    nodes.forEach(function(node, index) {
-      if (dependents[node.name]) {
-        nodes[index].dependents = dependents[node.name];
-      }
     });
   };
 
 
   var addIndex = function(node) {
     node.index = {
-      relatedNodes: [],
-      technos: [],
-      hosts: []
+      relatedNodes: []
     };
-    var dependsOn = getDetailCascade(node, 'dependsOn');
-    if (dependsOn.length > 0) {
-      node.index.relatedNodes = node.index.relatedNodes.concat(dependsOn);
-    }
     if (node.dependents) {
       node.index.relatedNodes = node.index.relatedNodes.concat(node.dependents);
     }
-    var technos = getDetailCascade(node, 'technos');
-    if (technos.length > 0) {
-      node.index.technos = technos;
-    }
-    var hosts = getHostsCascade(node);
-    if (hosts.length > 0) {
-      node.index.hosts = hosts;
-    }
   };
 
-  var getDetailCascade = function(node, detailName) {
-    var values = [];
-    if (node[detailName]) {
-      node[detailName].forEach(function(value) {
-        values.push(value);
-      });
-    }
-    if (node.parent) {
-      values = values.concat(getDetailCascade(node.parent, detailName));
-    }
-    return values;
-  };
-
-  var getHostsCascade = function(node) {
-    var values = [];
-    if (node.host) {
-      for (var i in node.host) {
-        values.push(i);
-      }
-    }
-    if (node.parent) {
-      values = values.concat(getHostsCascade(node.parent));
-    }
-    return values;
-  };
 
   var fade = function(opacity) {
     return function(node) {
@@ -205,7 +144,7 @@ d3.chart.architectureTree = function() {
     d3.select('#node-active').attr("id", null);
     activeNode = null;
     document.querySelector('#panel').dispatchEvent(
-      new CustomEvent("unSelectNode", { "detail": d.name })
+      new CustomEvent("unSelectNode")
     );
   };
 
