@@ -1,8 +1,8 @@
-angular.module('ChartsApp')
+angular.module('UpGuardApp')
 .controller('chartCtrl', function ($scope, socket) {
   'use strict';
 
-  socket.on('updateData', function(data) {
+  socket.on('update', function(data) {
     $scope.data = angular.copy(data);
   });
 });
