@@ -19,13 +19,14 @@ d3.chart.treeChart = function() {
       .append("g")
       .attr("transform", "translate(40, 0)");
 
-    var nodes = tree.nodes(treeData),
+    var nodes = tree.nodes(treeData).reverse(),
       links = tree.links(nodes);
 
     activeNode = null;
 
     svg.call(updateData, nodes, links);
   }
+
 
  
   var updateData = function(container, nodes, links) {
@@ -138,6 +139,7 @@ d3.chart.treeChart = function() {
       });
   };
 
+
   var unselect = function() {
     if (activeNode == null) return;
     fade(1)(activeNode);
@@ -162,5 +164,6 @@ d3.chart.treeChart = function() {
     diameter = value;
     return chart;
   };
+
   return chart;
 };
