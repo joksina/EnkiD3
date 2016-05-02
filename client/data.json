@@ -1,0 +1,246 @@
+{
+  "name": "Data",
+  "children": [
+    {
+      "name": "Web",
+      "children": [
+        {
+          "name": "Info",
+          "children": [
+            {
+              "name": "Endpoint",
+              "value": "https://www.upguard.com",
+              "description": "The endpoint after any 301 or 302 redirects"
+            },
+            {
+              "name": "Redirects",
+              "value": 0,
+              "description": "The amount of 301 or 302 redirects until we landed at the endpoint"
+            },
+            {
+              "name": "Admin Contact",
+              "names": "Mike Baukes",
+              "email": "5e863d23fefcabb7ea7413def3b357c7-1794075@contact.gandi.net",
+              "address": "Obfuscated whois Gandi-63-65 boulevard Massena Obfuscated whois Gandi-Paris"
+            },
+            {
+              "name": "Expires On",
+              "description": "The domain registration expires on this date",
+              "value": "2017-01-29T02:57:37Z"
+            }  
+          ]
+        },
+        {
+          "name": "Headers",
+          "children": [
+            { 
+              "name": "access-control-allow-credentials",
+              "value": "false"
+            }
+          ]
+        },
+        {
+          "name": "SSL",
+          "children": [
+            { 
+              "name": "Subject",
+              "value": "/CN=secure0024.hubspot.com"
+            },
+            { 
+              "name": "Issuer",
+              "value": "/C=US/O=Let's Encrypt/CN=Let's Encrypt Authority X3",
+              "description": "Who issued your certificate"
+            },
+            { 
+              "name": "Serial",
+              "value": "323570327217587773353723472236741423751112"
+            },
+            { 
+              "name": "Issued",
+              "value": "2016-04-27T16:55:00+00:00",
+              "description": "Your certificate was created on this date"
+            },
+            { 
+              "name": "Expires",
+              "value": "2016-07-26T16:55:00+00:00",
+              "description": "Your certificate expires on this date"
+            },
+            { 
+              "name": "Algorithm",
+              "value": "sha256WithRSAEncryption",
+              "description": "The signature algorithm used for encrypted communication"
+            }
+          ]
+        },
+        {
+          "name": "Meta Tags",
+          "children": [
+            { 
+              "name": "author",
+              "value": "UpGuard, Inc"
+            },
+            { 
+              "name": "description",
+              "value": "Visibility into the state of your IT infrastructure, enabling you to understand your risk potential, prevent breaches, and speed up software delivery."
+            },
+            { 
+              "name": "generator",
+              "value": "HubSpot"
+            },
+            { 
+              "name": "twitter.description",
+              "value": "Visibility into the state of your IT infrastructure, enabling you to understand your risk potential, prevent breaches, and speed up software delivery."
+            },
+            { 
+              "name": "twitter.title",
+              "value": "UpGuard - IT Visibility, Risk Management, and Digital Resilience"
+            },
+            {
+              "name": "viewport",
+              "value": "width=device-width, initial-scale=1"
+            },
+            { 
+              "name": "google-site-verfification",
+              "value": "mfm-_yawNEmpPrk6DneGS7yimmSVVR4BcFH2X7sUAI8"
+            }
+          ]
+        },
+        {
+          "name": "Scripts",
+          "children": [
+            {
+              "name": "jquery-1.7.1.js",
+              "names": "jquery-1.7.1.js",
+              "url": "//static.hsstatic.net/jquery-libs/static-1.1/jquery/jquery-1.7.1.js"
+            },
+            {
+              "name": "load.sumome.com",
+              "names": "load.sumome.com",
+              "url": "//load.sumome.com/"
+            },
+            {
+              "name": "current.js",
+              "names": "current.js",
+              "url": "//js.hscta.net/cta/current.js"
+            },
+            {
+              "name": "E-v1.js",
+              "names": "E-v1.js",
+              "url": "//fast.wistia.com/assets/external/E-v1.js"
+            },
+            {
+              "name": "v2.js",
+              "names": "v2.js",
+              "url": "//js.hsforms.net/forms/v2.js"
+            },
+            {
+              "name": "public_common.js",
+              "names": "public_common.js",
+              "url": "//static.hsstatic.net/content_shared_assets/static-1.4002/js/public_common.js"
+            },
+            {
+              "name": "oct.js",
+              "names": "oct.js",
+              "url": "//platform.twitter.com/oct.js"
+            },
+            {
+              "name": "integrations-hubspot-v1.js",
+              "names": "integrations-hubspot-v1.js",
+              "url": "//fast.wistia.com/static/integrations-hubspot-v1.js"
+            },
+            {
+              "name": "mobile-menu.min.js",
+              "names": "mobile-menu.min.js",
+              "url": "//cdn2.hubspot.net/hub/228391/hub_generated/style_manager/1397179657448/custom/page/scriptrock_scripts/mobile-menu.min.js"
+            },
+            {
+              "name": "conversion.js",
+              "names": "conversion.js",
+              "url": "//www.googleadservices.com/pagead/conversion.js"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DNS",
+      "children": [
+        { 
+          "name": "NS",
+          "children": [
+            { 
+              "name": "eva.ns.cloudflare.com",
+              "value": "eva.ns.cloudflare.com",
+              "record": "NS"
+            },
+            { 
+              "name": "hank.ns.cloudflare.com",
+              "value": "hank.ns.cloudflare.com",
+              "record": "NS"
+            }
+          ]
+        },
+        {
+          "name": "MX",
+          "children": [
+            { 
+              "name": "alt2.aspmx.l.google.com",
+              "value": "alt2.aspmx.l.google.com",
+              "record": "MX"
+            },
+            { 
+              "name": "alt1.aspmx.l.google.com",
+              "value": "alt1.aspmx.l.google.com",
+              "record": "MX"
+            },
+            { 
+              "name": "aspmx.l.google.com",
+              "value": "aspmx.l.google.com",
+              "record": "MX"
+            },
+            { 
+              "name": "aspmx3.googlemail.com",
+              "value": "aspmx3.googlemail.com",
+              "record": "MX"
+            },
+            { 
+              "name": "aspmx2.googlemail.com",
+              "value": "aspmx2.googlemail.com",
+              "record": "MX"
+            }
+          ]
+        },
+        {
+          "name": "A",
+          "children": [
+            { 
+              "name": "104.197.21.45",
+              "value": "104.197.21.45",
+              "record": "A"
+            }
+          ]
+        },
+        {
+          "name": "SPF",
+          "children": [
+            { 
+              "name": "v=spf1 include:sendgrid.net include:_spf.google.com include:mail.zendesk.com include:spf.mandrillapp.com ~all",
+              "value": "v=spf1 include:sendgrid.net include:_spf.google.com include:mail.zendesk.com include:spf.mandrillapp.com ~all",
+              "record": "TXT"
+            }
+          ]
+        },
+        {
+          "name": "DMARC",
+          "children": [
+            { 
+              "name": "v=DMARC1;p=none;rua=mailto:dmarc@upguard.com;adkim=s;aspf=r",
+              "value": "v=DMARC1;p=none;rua=mailto:dmarc@upguard.com;adkim=s;aspf=r",
+              "record": "TXT"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
