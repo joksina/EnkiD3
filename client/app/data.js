@@ -68,24 +68,23 @@ d3.chart.treeChart = function() {
         select(d.name);
       });
 
-    node.append("circle")
-      .attr("r", 5)
-      .style('stroke', "steelblue")
-      .style('fill', "white");
+      node.append("circle")
+        .attr("r", 5)
+        .style('stroke', "steelblue")
+        .style('fill', "white");
 
-    node.append("text")
-      .attr("dy", ".45em")
-      .attr("text-anchor", function(d) { return d.x  ? "start" : "end"; })
-      .attr("transform", function(d) { return d.x  ? "translate(9)" : "translate(-9)"; })
-      .text(function(d) {
-        return d.name;
-    });
+      node.append("text")
+        .attr("dy", ".45em")
+        .attr("text-anchor", function(d) { return d.x  ? "start" : "end"; })
+        .attr("transform", function(d) { return d.x  ? "translate(9)" : "translate(-9)"; })
+        .text(function(d) {
+          return d.name;
+      });
 
     nodes.map(function(node) {
       index(node);
     });
   };
-
 
   var index = function(node) {
     node.index = {
@@ -93,7 +92,6 @@ d3.chart.treeChart = function() {
     };    
     node.index.likeNode = node.index.likeNode.concat(node);   
   };
-
 
   var fade = function(opacity) {
     return function(node) {
