@@ -11,7 +11,7 @@ d3.chart.treeChart = function() {
   
   function chart(){
     var tree = d3.layout.tree()
-      .size([height, width - 160])
+      .size([height, width - 100])
 
     svg = d3.select("#graph").append("svg")
       .attr("width", width)
@@ -19,7 +19,7 @@ d3.chart.treeChart = function() {
       .append("g")
       .attr("transform", "translate(40, 0)");
 
-    var nodes = tree.nodes(root),
+    var nodes = tree.nodes(root).reverse(),
       links = tree.links(nodes);
 
     active = null;
