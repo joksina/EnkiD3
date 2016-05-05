@@ -22,14 +22,6 @@ angular.module('UpGuardApp')
         d3.select(element[0])
           .call(chart);
       });
-
-      socket.on('select', function(name) {
-        chart.select(name);
-      });
-
-      socket.on('unselect', function() {
-          chart.unselect();
-      });
     }
   };
 });
