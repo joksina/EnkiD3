@@ -70,7 +70,7 @@
   font-weight: bold;
 }
 #node-active text {
-  fill: rgb(70, 130, 180);
+  fill: #4682B4;
 }
 
 svg:not(:root) {
