@@ -10,7 +10,7 @@ angular.module('UpGuardApp')
     }
     socket[eventName].push(callback);
   };
-
+  
   var emit = function(eventName, body) {
     socket[eventName].forEach(function(callback) {
       callback(body);
